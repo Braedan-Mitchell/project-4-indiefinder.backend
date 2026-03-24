@@ -22,10 +22,10 @@ function Navbar() {
     <nav>
       <p>TEMP LOGO</p>
       <ul>
-        <li>Home</li>
-        <li>Games</li>
-        <li>About</li>
-        <li>Contact</li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/games">Games</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/contact">Contact</Link></li>
       </ul>
     </nav>
   )
@@ -63,7 +63,7 @@ function PlaceholderCarousel({ title, items }) {
   )
 }
 
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Link } from 'react-router-dom'
 import Games from './pages/Games'
 import About from './pages/About'
 import Contact from './pages/Contact'
