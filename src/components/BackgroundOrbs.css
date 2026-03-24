@@ -1,0 +1,64 @@
+.background-orbs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.background-orbs__orb {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(157, 125, 214, 0.28);
+}
+
+.background-orbs__orb--tone-1 {
+  background: rgba(157, 125, 214, 0.3);
+}
+
+.background-orbs__orb--tone-2 {
+  background: rgba(200, 182, 255, 0.33);
+}
+
+.background-orbs__orb--tone-3 {
+  background: rgba(157, 125, 214, 0.24);
+}
+
+.background-orbs__orb--slow {
+  animation: float-slow ease-in-out infinite;
+}
+
+.background-orbs__orb--medium {
+  animation: float-medium ease-in-out infinite;
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate(-50%, -50%);
+  }
+  25% {
+    transform: translate(calc(-50% + 14px), calc(-50% - 16px));
+  }
+  50% {
+    transform: translate(calc(-50% - 10px), calc(-50% + 18px));
+  }
+  75% {
+    transform: translate(calc(-50% + 16px), calc(-50% + 10px));
+  }
+}
+
+@keyframes float-medium {
+  0%, 100% {
+    transform: translate(-50%, -50%);
+  }
+  25% {
+    transform: translate(calc(-50% - 16px), calc(-50% + 12px));
+  }
+  50% {
+    transform: translate(calc(-50% + 14px), calc(-50% - 10px));
+  }
+  75% {
+    transform: translate(calc(-50% - 12px), calc(-50% - 16px));
+  }
+}

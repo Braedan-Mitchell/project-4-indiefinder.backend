@@ -1,0 +1,115 @@
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding: 0.8rem 1rem 0;
+}
+
+.site-nav__inner {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border: 2px solid rgba(216, 199, 255, 0.3);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.site-nav__brand {
+  display: inline-flex;
+  align-items: center;
+  margin-right: auto;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.site-nav__brand-wordmark {
+  display: inline-flex;
+  align-items: flex-end;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.site-nav__i-accent {
+  position: relative;
+  display: inline-block;
+}
+
+.site-nav__i-accent::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 0.06em;
+  width: 0.22em;
+  height: 0.22em;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.site-nav__toggle {
+  display: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--panel-strong);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.site-nav__link {
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 700;
+  transition: 180ms ease;
+}
+
+.site-nav__link:hover,
+.site-nav__link.active {
+  background: rgba(216, 199, 255, 0.2);
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .site-nav__inner {
+    border-radius: 28px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .site-nav__toggle {
+    display: inline-grid;
+    place-items: center;
+  }
+
+  .site-nav__links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: 0.5rem;
+  }
+
+  .site-nav__links.is-open {
+    display: flex;
+  }
+
+  .site-nav__link {
+    text-align: center;
+  }
+}
