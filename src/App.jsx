@@ -72,6 +72,8 @@ function PlaceholderCarousel({ title, items }) {
 import { Route, Routes, NavLink } from 'react-router-dom'
 import './styles/base.css'
 import './components/Navbar.css'
+import './components/BackgroundOrbs.css'
+import BackgroundOrbs from './components/BackgroundOrbs'
 import Games from './pages/Games'
 import About from './pages/About'
 import Contact from './pages/Contact'
@@ -91,6 +93,7 @@ function Home() {
 function App() {
   return (
     <div className="app-shell">
+      <BackgroundOrbs />
       <Navbar />
       <main className="page-shell">
         <Routes>
