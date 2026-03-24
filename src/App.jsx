@@ -63,16 +63,34 @@ function PlaceholderCarousel({ title, items }) {
   )
 }
 
-function App() {
+import { Route, Routes } from 'react-router-dom'
+import Games from './pages/Games'
+import About from './pages/About'
+import Contact from './pages/Contact'
+
+function Home() {
   return (
-    <main>
-      <Navbar />
+    <>
       <CuratedDiscoveriesBox />
 
       {placeholderRows.map(row => (
         <PlaceholderCarousel key={row.title} title={row.title} items={row.items} />
       ))}
-    </main>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/games" element={<Games />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </div>
   )
 }
 
