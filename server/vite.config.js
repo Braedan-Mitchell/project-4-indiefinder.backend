@@ -9,6 +9,7 @@ const clientRoot = resolve(workspaceRoot, 'client')
 
 export default defineConfig({
   root: clientRoot,
+  cacheDir: resolve(serverRoot, 'node_modules/.vite'),
   plugins: [react()],
   resolve: {
     alias: {
@@ -23,6 +24,13 @@ export default defineConfig({
   server: {
     fs: {
       allow: [workspaceRoot],
+    },
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:3001',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, ''),
+      },
     },
   },
   build: {
