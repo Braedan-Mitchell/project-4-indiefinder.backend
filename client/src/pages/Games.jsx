@@ -1,11 +1,13 @@
 import PageHero from '../components/PageHero'
 import GameCard from '../components/GameCard'
+import { useAppData } from '../context/AppDataContext'
 import useGameFilters from '../hooks/useGameFilters'
-import { allGames, genreOptions, sortOptions } from '../../../server/utils/gameData'
+import { genreOptions, sortOptions } from '../utils/gameData'
 import './Games.css'
 
 function Games() {
-  const { filters, consoles, filteredGames, updateFilter, resetFilters } = useGameFilters(allGames)
+  const { games, gamesError, isGamesLoading } = useAppData()
+  const { filters, consoles, filteredGames, updateFilter, resetFilters } = useGameFilters(games)
 
   return (
     <main>
@@ -99,7 +101,7 @@ function Games() {
 
           <div className="games-toolbar__footer">
             <span className="games-toolbar__summary">
-              Showing {filteredGames.length} of {allGames.length} games
+              {isGamesLoading ? 'Loading games...' : `Showing ${filteredGames.length} of ${games.length} games`}
             </span>
             <button className="games-toolbar__button" onClick={resetFilters}>
               Reset Filters
@@ -108,7 +110,8 @@ function Games() {
         </div>
 
         <div className="games-grid">
-          {filteredGames.map(game => (
+          {gamesError && <p>{gamesError}</p>}
+          {!gamesError && !isGamesLoading && filteredGames.map(game => (
             <GameCard key={game.id} game={game} />
           ))}
         </div>

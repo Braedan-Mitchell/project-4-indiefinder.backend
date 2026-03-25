@@ -2,23 +2,29 @@ import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import Carousel from '../components/Carousel'
 import PageHero from '../components/PageHero'
+import { useAppData } from '../context/AppDataContext'
 import {
-  allGames,
   getCheapestGames,
   getNewestGames,
   getPopularGames,
   getRandomGames,
-} from '../../../server/utils/gameData'
+} from '../utils/gameData'
 import './Home.css'
 
 function Home() {
+  const { games, gamesError, isGamesLoading } = useAppData()
+
   const featured = useMemo(
-    () => getRandomGames(allGames, 3),
-    []
+    () => getRandomGames(games, 3),
+    [games]
   )
-  const newer = useMemo(() => getNewestGames(allGames, 3), [])
-  const popular = useMemo(() => getPopularGames(allGames, 3), [])
-  const cheaper = useMemo(() => getCheapestGames(allGames, 3), [])
+  const newer = useMemo(() => getNewestGames(games, 3), [games])
+  const popular = useMemo(() => getPopularGames(games, 3), [games])
+  const cheaper = useMemo(() => getCheapestGames(games, 3), [games])
+
+  const statusMessage = isGamesLoading
+    ? 'Loading catalog...'
+    : gamesError || ''
 
   return (
     <div className="page-stack">
@@ -30,7 +36,7 @@ function Home() {
       >
         <div className="home-meta">
           <div className="home-meta__card">
-            <span className="home-meta__value">{allGames.length}</span>
+            <span className="home-meta__value">{isGamesLoading ? '...' : games.length}</span>
             <span className="home-meta__label">Curated entries</span>
           </div>
           <div className="home-meta__card">
@@ -51,7 +57,7 @@ function Home() {
             <p>Hand-picked from the catalog to give the homepage a different pulse every time.</p>
           </div>
         </div>
-        <Carousel games={featured} />
+        {statusMessage ? <p>{statusMessage}</p> : <Carousel games={featured} />}
       </section>
 
       <section className="home-rail">
@@ -67,21 +73,21 @@ function Home() {
             <div className="section-heading">
               <h2>Newer Games</h2>
             </div>
-          <Carousel games={newer} />
+          {statusMessage ? <p>{statusMessage}</p> : <Carousel games={newer} />}
           </div>
 
           <div>
             <div className="section-heading">
               <h2>Popular Games</h2>
             </div>
-          <Carousel games={popular} />
+          {statusMessage ? <p>{statusMessage}</p> : <Carousel games={popular} />}
           </div>
 
           <div>
             <div className="section-heading">
               <h2>Cheaper Games</h2>
             </div>
-          <Carousel games={cheaper} />
+          {statusMessage ? <p>{statusMessage}</p> : <Carousel games={cheaper} />}
           </div>
         </div>
       </section>

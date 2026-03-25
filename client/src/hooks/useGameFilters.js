@@ -3,7 +3,7 @@ import {
   filterAndSortGames,
   getAllConsoles,
   initialGameFilters,
-} from '../../../server/utils/gameData'
+} from '../utils/gameData'
 
 function useGameFilters(games) {
   const [filters, setFilters] = useState(initialGameFilters)
