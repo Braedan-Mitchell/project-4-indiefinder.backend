@@ -35,26 +35,24 @@ export function parseGameDate(dateString) {
   return new Date(year, month - 1, day)
 }
 
+function pickGames(games, count, sortFn) {
+  return [...games].sort(sortFn).slice(0, count)
+}
+
 export function getRandomGames(games, count) {
-  return [...games].sort(() => Math.random() - 0.5).slice(0, count)
+  return pickGames(games, count, () => Math.random() - 0.5)
 }
 
 export function getNewestGames(games, count) {
-  return [...games]
-    .sort((a, b) => parseGameDate(b.date) - parseGameDate(a.date))
-    .slice(0, count)
+  return pickGames(games, count, (a, b) => parseGameDate(b.date) - parseGameDate(a.date))
 }
 
 export function getPopularGames(games, count) {
-  return [...games]
-    .sort((a, b) => Number(b.rating) - Number(a.rating))
-    .slice(0, count)
+  return pickGames(games, count, (a, b) => Number(b.rating) - Number(a.rating))
 }
 
 export function getCheapestGames(games, count) {
-  return [...games]
-    .sort((a, b) => Number(a.price) - Number(b.price))
-    .slice(0, count)
+  return pickGames(games, count, (a, b) => Number(a.price) - Number(b.price))
 }
 
 export function getAllConsoles(games) {

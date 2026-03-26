@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './Carousel.css'
+import { formatPrice } from '../utils/formatters'
 
 function Carousel({ games }) {
   const [index, setIndex] = useState(0)
@@ -29,16 +30,14 @@ function Carousel({ games }) {
               <div className="carousel__content">
                 <h3 className="carousel__title">{game.title}</h3>
                 <div className="carousel__meta" aria-label="Genres">
-                {genres.length > 0
-                  ? genres.map(g => (
-                      <span key={g} className="carousel__badge">
-                        {g}
-                      </span>
-                    ))
-                  : <span className="carousel__badge">N/A</span>}
+                  {(genres.length > 0 ? genres : ['N/A']).map(g => (
+                    <span key={g} className="carousel__badge">
+                      {g}
+                    </span>
+                  ))}
                 </div>
                 <div className="carousel__stats">
-                  <span>${game.price.toFixed(2)}</span>
+                  <span>{formatPrice(game.price)}</span>
                   <span>{game.rating}/10</span>
                 </div>
               </div>

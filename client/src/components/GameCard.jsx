@@ -1,4 +1,5 @@
 import './GameCard.css'
+import { formatPrice } from '../utils/formatters'
 
 function GameCard({ game }) {
   return (
@@ -17,7 +18,7 @@ function GameCard({ game }) {
         <p className="game-card__genres">{game.genre.join(' • ')}</p>
         <p className="game-card__consoles">{game.console.join(', ')}</p>
         <div className="game-card__footer">
-          <span className="game-card__price">${game.price.toFixed(2)}</span>
+          <span className="game-card__price">{formatPrice(game.price)}</span>
         </div>
       </div>
     </article>

@@ -4,12 +4,28 @@ import { validateContactForm, validateRecommendationForm } from '../utils/contac
 import { createRecommendation, formatRecommendationReviewLog } from '../services/apiClient'
 import './Contact.css'
 
+const initialContactForm = { name: '', email: '', title: '', message: '' }
+const initialRecommendationForm = {
+  recommenderName: '',
+  gameTitle: '',
+  gameDesc: '',
+  foundOn: '',
+}
+
+function updateFormWithFieldErrorClear(name, value, setForm, errors, setErrors) {
+  setForm(prev => ({ ...prev, [name]: value }))
+
+  if (errors[name]) {
+    setErrors(prev => ({ ...prev, [name]: '' }))
+  }
+}
+
 function Contact() {
-  const [contactForm, setContactForm] = useState({ name: '', email: '', title: '', message: '' })
+  const [contactForm, setContactForm] = useState(initialContactForm)
   const [contactErrors, setContactErrors] = useState({})
   const [contactSuccess, setContactSuccess] = useState(false)
 
-  const [recommendForm, setRecommendForm] = useState({ recommenderName: '', gameTitle: '', gameDesc: '', foundOn: '' })
+  const [recommendForm, setRecommendForm] = useState(initialRecommendationForm)
   const [recommendErrors, setRecommendErrors] = useState({})
   const [recommendSuccess, setRecommendSuccess] = useState(false)
   const [recommendApiError, setRecommendApiError] = useState('')
@@ -18,18 +34,12 @@ function Contact() {
 
   const handleContactChange = (e) => {
     const { name, value } = e.target
-    setContactForm(prev => ({ ...prev, [name]: value }))
-    if (contactErrors[name]) {
-      setContactErrors(prev => ({ ...prev, [name]: '' }))
-    }
+    updateFormWithFieldErrorClear(name, value, setContactForm, contactErrors, setContactErrors)
   }
 
   const handleRecommendChange = (e) => {
     const { name, value } = e.target
-    setRecommendForm(prev => ({ ...prev, [name]: value }))
-    if (recommendErrors[name]) {
-      setRecommendErrors(prev => ({ ...prev, [name]: '' }))
-    }
+    updateFormWithFieldErrorClear(name, value, setRecommendForm, recommendErrors, setRecommendErrors)
   }
 
   const handleContactSubmit = (e) => {
@@ -38,7 +48,7 @@ function Contact() {
     
     if (Object.keys(errors).length === 0) {
       setContactSuccess(true)
-      setContactForm({ name: '', email: '', title: '', message: '' })
+      setContactForm(initialContactForm)
       setTimeout(() => setContactSuccess(false), 3000)
     } else {
       setContactErrors(errors)
@@ -61,7 +71,7 @@ function Contact() {
           ...prev,
         ])
         setRecommendSuccess(true)
-        setRecommendForm({ recommenderName: '', gameTitle: '', gameDesc: '', foundOn: '' })
+        setRecommendForm(initialRecommendationForm)
         setTimeout(() => setRecommendSuccess(false), 3000)
       } catch {
         setRecommendApiError('Could not submit recommendation right now. Please try again.')

@@ -1,48 +1,22 @@
-import { Route, Routes, NavLink, useNavigate, useLocation } from 'react-router-dom'
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import './styles/base.css'
-import './components/Navbar.css'
 import './components/BackgroundOrbs.css'
 import './components/RouteTransitionOverlay.css'
 import BackgroundOrbs from './components/BackgroundOrbs'
+import Navbar from './components/Navbar'
 import RouteTransitionOverlay from './components/RouteTransitionOverlay'
+import {
+  COVER_DURATION_MS,
+  HOLD_DURATION_MS,
+  REVEAL_DURATION_MS,
+} from './constants/transitions'
 import Home from './pages/Home'
 import Games from './pages/Games'
 import About from './pages/About'
 import Contact from './pages/Contact'
 
-function Navbar({ onNavigateWithTransition, isTransitioning }) {
-  const handleNavigation = (event, path) => {
-    if (isTransitioning) {
-      event.preventDefault()
-      return
-    }
-    event.preventDefault()
-    onNavigateWithTransition(path)
-  }
-
-  return (
-    <nav className="site-nav">
-      <div className="site-nav__inner">
-        <NavLink className="site-nav__brand" to="/" end onClick={(e) => handleNavigation(e, '/')}>
-          <span className="site-nav__brand-wordmark">INDIEFINDER</span>
-        </NavLink>
-        <div className="site-nav__links">
-          <NavLink className="site-nav__link" to="/" end onClick={(e) => handleNavigation(e, '/')}>Home</NavLink>
-          <NavLink className="site-nav__link" to="/games" onClick={(e) => handleNavigation(e, '/games')}>Games</NavLink>
-          <NavLink className="site-nav__link" to="/about" onClick={(e) => handleNavigation(e, '/about')}>About</NavLink>
-          <NavLink className="site-nav__link" to="/contact" onClick={(e) => handleNavigation(e, '/contact')}>Contact</NavLink>
-        </div>
-      </div>
-    </nav>
-  )
-}
-
 function App() {
-  const COVER_DURATION_MS = 620
-  const HOLD_DURATION_MS = 300
-  const REVEAL_DURATION_MS = 700
-
   const navigate = useNavigate()
   const location = useLocation()
   const [transitionStage, setTransitionStage] = useState('idle')

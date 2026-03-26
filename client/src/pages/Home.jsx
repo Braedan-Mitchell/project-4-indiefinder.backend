@@ -11,6 +11,14 @@ import {
 } from '../utils/gameData'
 import './Home.css'
 
+function StatusCarousel({ games, statusMessage }) {
+  if (statusMessage) {
+    return <p>{statusMessage}</p>
+  }
+
+  return <Carousel games={games} />
+}
+
 function Home() {
   const { games, gamesError, isGamesLoading } = useAppData()
 
@@ -57,7 +65,7 @@ function Home() {
             <p>Hand-picked from the catalog to give the homepage a different pulse every time.</p>
           </div>
         </div>
-        {statusMessage ? <p>{statusMessage}</p> : <Carousel games={featured} />}
+        <StatusCarousel games={featured} statusMessage={statusMessage} />
       </section>
 
       <section className="home-rail">
@@ -73,21 +81,21 @@ function Home() {
             <div className="section-heading">
               <h2>Newer Games</h2>
             </div>
-          {statusMessage ? <p>{statusMessage}</p> : <Carousel games={newer} />}
+            <StatusCarousel games={newer} statusMessage={statusMessage} />
           </div>
 
           <div>
             <div className="section-heading">
               <h2>Popular Games</h2>
             </div>
-          {statusMessage ? <p>{statusMessage}</p> : <Carousel games={popular} />}
+            <StatusCarousel games={popular} statusMessage={statusMessage} />
           </div>
 
           <div>
             <div className="section-heading">
               <h2>Cheaper Games</h2>
             </div>
-          {statusMessage ? <p>{statusMessage}</p> : <Carousel games={cheaper} />}
+            <StatusCarousel games={cheaper} statusMessage={statusMessage} />
           </div>
         </div>
       </section>
