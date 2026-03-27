@@ -1,13 +1,25 @@
+import { useMemo } from 'react'
 import PageHero from '../components/PageHero'
 import GameCard from '../components/GameCard'
 import { useAppData } from '../context/AppDataContext'
 import useGameFilters from '../hooks/useGameFilters'
-import { genreOptions, sortOptions } from '../utils/gameData'
+import { genreOptions, sortOptions, initialGameFilters } from '../utils/gameData'
 import './Games.css'
 
 function Games() {
   const { games, gamesError, isGamesLoading } = useAppData()
   const { filters, consoles, filteredGames, updateFilter, resetFilters } = useGameFilters(games)
+
+  const activeCardFields = useMemo(() => {
+    const fields = new Set()
+    if (filters.maxPrice !== initialGameFilters.maxPrice) fields.add('price')
+    if (filters.minRating !== initialGameFilters.minRating) fields.add('rating')
+    if (filters.genre !== initialGameFilters.genre) fields.add('genres')
+    if (filters.selectedConsole !== initialGameFilters.selectedConsole) fields.add('consoles')
+    if (filters.sort === 'price-low' || filters.sort === 'price-high') fields.add('price')
+    if (filters.sort === 'newest' || filters.sort === 'oldest') fields.add('date')
+    return fields
+  }, [filters])
 
   return (
     <main>
@@ -112,7 +124,7 @@ function Games() {
         <div className="games-grid">
           {gamesError && <p>{gamesError}</p>}
           {!gamesError && !isGamesLoading && filteredGames.map(game => (
-            <GameCard key={game.id} game={game} />
+            <GameCard key={game.id} game={game} activeFields={activeCardFields} />
           ))}
         </div>
       </div>
