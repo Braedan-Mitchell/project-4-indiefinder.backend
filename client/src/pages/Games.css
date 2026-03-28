@@ -4,7 +4,7 @@
   padding: 1.25rem;
   border: 2px solid var(--brand);
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(var(--tone-white-rgb), 0.95);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
@@ -68,7 +68,7 @@
   padding: 0.85rem 1.1rem;
   border-radius: 999px;
   background: var(--accent);
-  color: white;
+  color: var(--tone-white);
   font-weight: 800;
   cursor: pointer;
   transition: background 200ms ease;

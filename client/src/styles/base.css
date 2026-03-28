@@ -1,13 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  --bg: #ffffff;
-  --bg-soft: #fafaf9;
-  --panel: rgba(255, 255, 255, 0.95);
-  --panel-strong: #ffffff;
-  --ink: #333333;
-  --muted: #666666;
-  --line: rgba(51, 51, 51, 0.08);
+  --tone-white-rgb: 255, 255, 255;
+  --tone-soft-rgb: 250, 250, 249;
+  --tone-gray-rgb: 102, 102, 102;
+  --tone-ink-rgb: 51, 51, 51;
+  --tone-white: rgb(var(--tone-white-rgb));
+  --tone-gray: rgb(var(--tone-gray-rgb));
+  --tone-ink: rgb(var(--tone-ink-rgb));
+  --bg: var(--tone-white);
+  --bg-soft: rgb(var(--tone-soft-rgb));
+  --panel: rgba(var(--tone-white-rgb), 0.95);
+  --panel-strong: var(--tone-white);
+  --ink: var(--tone-ink);
+  --muted: var(--tone-gray);
+  --line: rgba(var(--tone-ink-rgb), 0.08);
   --brand: #d8c7ff;
   --brand-strong: #c8b6ff;
   --accent: #9d7dd6;
@@ -19,6 +26,13 @@
   --radius-lg: 28px;
   --radius-md: 18px;
   --radius-sm: 12px;
+}
+
+:root.theme-dark {
+  --tone-white-rgb: 26, 26, 26;
+  --tone-soft-rgb: 18, 18, 18;
+  --tone-gray-rgb: 255, 255, 255;
+  --tone-ink-rgb: 255, 255, 255;
 }
 
 * {
