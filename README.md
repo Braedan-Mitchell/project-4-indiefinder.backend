@@ -1,19 +1,159 @@
-# Project 4: Indiefinder- A fast way to find and support indie video games!
-https://github.com/Braedan-Mitchell/project-4-indiefinder.backend
-## Summary
-Indiefinder is a website that is made to help indie video games get found and supported by people who want something new and fresh in the gaming industry. By creating a library of games that people can seach through, people can easily find new games made by smaller creators or teams. To make it even more unique, each page for a specific game will show you:
-1. Where you can find the game,
-2. How much the game is on different sites and consoles (as well as possible sales) to help you get the best option,
-3. A basic summary of the game and information about it's creators,
-4. A quick show of ratings when applicable,
-5. And for a small fee to the creator,  donation option for the creators so fans can support them besides buying the game itself.
+# IndieFinder
 
-The point of this website is to solve a few major problems in the gaming industry; when bigger game companies overshadow smaller games making it difficult to find good indie games in their respective genres. The user should be able to easily find a new game in their favorite genre(s) and do research on where they can get the game as well as what to expect with it.
+IndieFinder is a site built around one idea: indie games deserve to be found. Bigger releases tend to drown out smaller studios, so this app gives those games a dedicated space where people can browse, discover, and recommend titles they love.
 
-## User stories
+It's a full-stack CRUD app — a React frontend, an Express backend, and a live PostgreSQL database hosted on Neon. Users can browse the game catalog, filter by genre and platform, send a contact message, or submit a game recommendation that gets saved to the database.
+
+**Live site:** https://project-4-indiefinder-backend.vercel.app  
+**API:** https://indiefinder-api.onrender.com  
+**GitHub:** https://github.com/Braedan-Mitchell/project-4-indiefinder.backend
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React 18, React Router v6, Vite |
+| Backend | Node.js, Express 5 |
+| Database | PostgreSQL (Neon cloud) |
+| Frontend deploy | Vercel |
+| Backend deploy | Render |
+
+---
+
+## Features
+
+- Browse 13 curated indie games with filtering by genre, platform, and price
+- Expandable game cards with full details
+- Home page carousels: Featured, Newest, Most Popular, Cheapest
+- Contact form — submissions are saved to the database
+- Game recommendation form — submitted games show up in a live review log on the page
+
+---
+
+## User Stories
+
 1. As a bored gamer, I want to easily find a fresh new indie game to give a try.
 2. As someone who saw a game while scrolling YouTube, I want to see if I have the hardware to get it.
-3. As a fan of a specific indie game, I want to be able to send them extra money to show my appreciation
+3. As a fan of a specific indie game, I want to be able to send them extra money to show my appreciation.
+
+---
+
+## Running It Locally
+
+You'll need Node.js 18+ and a Neon PostgreSQL database set up before starting.
+
+### 1. Clone the repo
+```bash
+git clone https://github.com/Braedan-Mitchell/project-4-indiefinder.backend.git
+cd project-4-indiefinder.backend
+```
+
+### 2. Install dependencies
+```bash
+cd server
+npm install
+```
+
+### 3. Create the `.env` file
+Inside `server/`, create a file named `.env` and add your Neon connection string:
+```
+DATABASE_URL=your_neon_connection_string_here
+PORT=3001
+```
+
+### 4. Set up the database
+Run these in your Neon SQL editor to create the three tables the app needs:
+```sql
+CREATE TABLE games (
+  id SERIAL PRIMARY KEY,
+  image TEXT,
+  title TEXT NOT NULL,
+  price TEXT,
+  genre TEXT,
+  date TEXT,
+  console TEXT[],
+  rating TEXT
+);
+
+CREATE TABLE recommendations (
+  id SERIAL PRIMARY KEY,
+  recommender_name TEXT NOT NULL,
+  game_title TEXT NOT NULL,
+  game_desc TEXT,
+  found_on TEXT
+);
+
+CREATE TABLE contacts (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  title TEXT NOT NULL,
+  message TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+### 5. Start the app
+
+You'll need two terminals running at the same time.
+
+Backend (first terminal):
+```bash
+cd server
+node index.js
+```
+
+Frontend (second terminal):
+```bash
+cd server
+npm run dev
+```
+
+Then open `http://localhost:5173` in your browser. You should see the home page load with games from the database.
+
+---
+
+## API Endpoints
+
+| Method | Route | Description |
+|---|---|---|
+| GET | `/games` | Get all games |
+| GET | `/games/:id` | Get a single game |
+| POST | `/games` | Create a game |
+| PUT | `/games/:id` | Update a game |
+| DELETE | `/games/:id` | Delete a game |
+| GET | `/recommendations` | Get all recommendations |
+| POST | `/recommendations` | Submit a recommendation |
+| GET | `/contacts` | Get all contact submissions |
+| POST | `/contacts` | Submit a contact message |
+
+---
+
+## Project Structure
+
+```
+project-4-indiefinder.backend/
+├── client/          # React frontend source
+│   └── src/
+│       ├── components/
+│       ├── pages/
+│       ├── context/
+│       ├── services/   # API client
+│       └── utils/
+└── server/          # Express backend + Vite config
+    ├── index.js
+    ├── vite.config.js
+    └── src/
+        ├── controllers/
+        ├── routes/
+        ├── services/
+        └── db/
+```
+
+---
 
 ## Wireframe
+
 https://www.figma.com/make/Y1tC8fRCJvtRQDHPoC4WwG/Indie-Game-Discovery-Website?fullscreen=1&t=ohY3U6OvHvDX5Zwh-1
