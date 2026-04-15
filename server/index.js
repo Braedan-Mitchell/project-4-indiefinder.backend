@@ -3,6 +3,7 @@ import cors from 'cors'
 import 'dotenv/config'
 import gamesRouter from './src/routes/games.routes.js'
 import recommendationsRouter from './src/routes/recommendations.routes.js'
+import contactsRouter from './src/routes/contacts.routes.js'
 import pool from './src/db/pool.js'
 
 const app = express()
@@ -20,6 +21,7 @@ app.get('/health', (req, res) => {
 // Routes
 app.use('/games', gamesRouter)
 app.use('/recommendations', recommendationsRouter)
+app.use('/contacts', contactsRouter)
 
 app.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`)
