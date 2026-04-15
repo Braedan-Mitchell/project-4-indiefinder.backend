@@ -1,4 +1,6 @@
-const API_BASE_URL = '/api'
+// In production (Vercel), VITE_API_URL is set to the Render backend URL.
+// Locally, it is undefined and falls back to '/api', which Vite proxies to localhost:3001.
+const API_BASE_URL = import.meta.env.VITE_API_URL ?? '/api'
 
 export const apiRoutes = {
   games: '/games',

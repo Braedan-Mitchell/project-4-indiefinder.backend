@@ -10,7 +10,8 @@ const app = express()
 const PORT = process.env.PORT || 3001
 
 // Middleware
-app.use(cors())
+const allowedOrigin = process.env.ALLOWED_ORIGIN || 'http://localhost:5173'
+app.use(cors({ origin: allowedOrigin }))
 app.use(express.json())
 
 // Health check — a quick way to verify the server is running
