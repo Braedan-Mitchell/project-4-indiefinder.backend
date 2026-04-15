@@ -1,5 +1,5 @@
 const nameRegex = /^[A-Za-z\s]+$/
-const emailRegex = /@(?:icloud\.com|gmail\.com)$/i
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export function validateContactForm(values) {
   const errors = {}
@@ -13,7 +13,7 @@ export function validateContactForm(values) {
   if (!values.email) {
     errors.email = 'Please enter your email.'
   } else if (!emailRegex.test(values.email)) {
-    errors.email = 'Email must end with @icloud.com or @gmail.com.'
+    errors.email = 'Please enter a valid email address.'
   }
 
   if (!values.title) {
