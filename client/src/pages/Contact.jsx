@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import PageHero from '../components/PageHero'
 import { validateContactForm, validateRecommendationForm } from '../utils/contactValidation'
-import { createRecommendation, formatRecommendationReviewLog } from '../services/apiClient'
+import { createContact, createRecommendation, formatRecommendationReviewLog } from '../services/apiClient'
 import './Contact.css'
 
 const initialContactForm = { name: '', email: '', title: '', message: '' }
@@ -42,14 +42,19 @@ function Contact() {
     updateFormWithFieldErrorClear(name, value, setRecommendForm, recommendErrors, setRecommendErrors)
   }
 
-  const handleContactSubmit = (e) => {
+  const handleContactSubmit = async (e) => {
     e.preventDefault()
     const errors = validateContactForm(contactForm)
     
     if (Object.keys(errors).length === 0) {
-      setContactSuccess(true)
-      setContactForm(initialContactForm)
-      setTimeout(() => setContactSuccess(false), 3000)
+      try {
+        await createContact(contactForm)
+        setContactSuccess(true)
+        setContactForm(initialContactForm)
+        setTimeout(() => setContactSuccess(false), 3000)
+      } catch {
+        setContactErrors({ message: 'Could not send message right now. Please try again.' })
+      }
     } else {
       setContactErrors(errors)
     }
