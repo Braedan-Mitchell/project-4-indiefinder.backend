@@ -21,6 +21,20 @@ It's a full-stack CRUD app — a React frontend, an Express backend, and a live 
 | Backend deploy | Render |
 
 ---
+</>
+
+## Screenshots
+
+### Home Page
+![Home Page](./README_screenshots/indiefinder_games.png)
+
+### Game Search and Filters
+![Filters](./README_screenshots/indiefinder_home.png)
+
+### Recommendations
+![Recommendations](./README_screenshots/indiefinder_contact.png)
+
+---
 
 ## Features
 
