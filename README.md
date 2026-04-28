@@ -10,6 +10,12 @@ It's a full-stack CRUD app — a React frontend, an Express backend, and a live 
 
 ---
 
+## Why I Built This
+
+I built IndieFinder around a problem I genuinely care about—helping great indie games get discovered—while using it as a vehicle to develop stronger full-stack engineering skills.
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |
@@ -21,7 +27,6 @@ It's a full-stack CRUD app — a React frontend, an Express backend, and a live 
 | Backend deploy | Render |
 
 ---
-</>
 
 ## Screenshots
 
