@@ -41,9 +41,19 @@ I built IndieFinder around a problem I genuinely care about—helping great indi
 
 ---
 
+## Engineering Challenges
+
+- Implemented multi-parameter filtering and sorting logic to support fast game discovery across multiple search dimensions.
+
+- Designed and integrated a PostgreSQL-backed catalog supporting CRUD operations, user-submitted recommendations, and dynamic data retrieval.
+
+- Coordinated deployment across Vercel, Render, and Neon while managing frontend-backend communication and environment configuration.
+
+---
+
 ## Features
 
-- Browse 13 curated indie games with filtering by genre, platform, and price
+- Browse curated indie games by filtering through genre, platform, and price
 - Expandable game cards with full details
 - Home page carousels: Featured, Newest, Most Popular, Cheapest
 - Contact form — submissions are saved to the database
